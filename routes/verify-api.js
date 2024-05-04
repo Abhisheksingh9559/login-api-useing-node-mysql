@@ -7,15 +7,14 @@ const { apiAuthenticated } = require('../utils/comman');
 
 verifyApiRouter.post(API_URLS.USER_LOGIN, 
   // apiAuthenticated(),
-  async (req, res) => {
-  console.log('start 1222222');
-   (await userLoginApi(req.body), res);
+  async (req, res) => { 
+   (await userLoginApi(req.body, res), res);
 });
 
-verifyApiRouter.get(API_URLS.USER_VERIFY, async (req, res) => {
-  console.log('start 1444444');
-  apiAuthenticated()
-  (await userVerifyApi(req.body), res);
+verifyApiRouter.get(API_URLS.USER_VERIFY, 
+  // apiAuthenticated(),
+  async (req, res) => { 
+   (await userVerifyApi(req.query), res);
 });
 
 module.exports = verifyApiRouter;

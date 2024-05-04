@@ -10,10 +10,7 @@ exports.userLoginApi = async (req, res) => {
         const selectSql = `SELECT user_password, Full_name FROM users WHERE Full_name = '${name}' LIMIT 1;`;
         const sqlData = await sqlFunction(selectSql);
         if (!sqlData) {
-            return {
-                status: RESPONSE_STATUS.FAIL,
-                message: MESSAGES.COMMON_MESSAGE.RECORD_NOT_FOUND
-            };
+            return res.status(401).json({ error: MESSAGES.COMMON_MESSAGE.INVALID_USERNAME_OR_PASSWORD });
         }
         const validPassworld = sqlData[0].user_password;
         const validName = sqlData[0].Full_name;
@@ -22,24 +19,19 @@ exports.userLoginApi = async (req, res) => {
         }
         return res.status(200).json({ message: MESSAGES.COMMON_MESSAGE.LOGIN_SUCCESSFUL });
     } catch (error) {
-        return {
-            status: RESPONSE_STATUS.ERROR,
-            message: error.message,
-        };
+        return res.status(500).json({ error: MESSAGES.COMMON_MESSAGE.INVALID_USERNAME_OR_PASSWORD });
     }
 };
 
 
 exports.userVerifyApi = async (req, res) => {
     try {
-        console.log('start');
-        const { name, password } = req.body;
+        const { name, password } = req;
         const insertSql = `
-        INSERT INTO users (Full_name, user_password, cts)
-        VALUES ('${name}', '${password}', NOW());
-        `;
-        await generateToken(name);
-        await sqlFunction(insertSql);
+         INSERT INTO users (id, Full_name, user_password, cts)
+         VALUES (6, '${name}', '${password}', NOW());`;
+        // await generateToken(name);
+        const daya = await sqlFunction(insertSql);
 
         return res.status(200).json({ message: MESSAGES.COMMON_MESSAGE.SUCCESS });
         

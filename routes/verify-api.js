@@ -6,15 +6,13 @@ const { userLoginApi, userVerifyApi } = require('../services/verify-login');
 const { apiAuthenticated } = require('../utils/comman');
 
 verifyApiRouter.post(API_URLS.USER_LOGIN, 
-  // apiAuthenticated(),
+  apiAuthenticated(),
   async (req, res) => { 
    (await userLoginApi(req.body, res), res);
 });
 
 verifyApiRouter.get(API_URLS.USER_VERIFY, 
-  // apiAuthenticated(),
-  async (req, res) => { 
-   (await userVerifyApi(req.query), res);
+  async (req, res) => {
+   (await userVerifyApi(req.body, res), res);
 });
-
 module.exports = verifyApiRouter;

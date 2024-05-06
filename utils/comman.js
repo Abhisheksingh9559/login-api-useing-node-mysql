@@ -55,3 +55,27 @@ exports.apiAuthenticated = () => async (req, res, next) => {
     }
     return next();
 };
+
+exports.apiStatusCode = async ({ status, message, responseCode }, res) => {
+    let statusCode = 200;
+    let statusMSG = 'Success';
+
+    if (status === RESPONSE_STATUS.FAIL) {
+        statusCode = 400;
+        statusMSG = message;
+    } else if (status === RESPONSE_STATUS.UNAUTHORIZED) {
+        statusCode = 401;
+        statusMSG = message;
+    } else if (status === RESPONSE_STATUS.NOT_FOUND) {
+        statusCode = 404;
+        statusMSG = message;
+    } else if (status === RESPONSE_STATUS.BAD_REQUEST) {
+        statusCode = 400;
+        statusMSG = message;
+    }
+    res.status(statusCode).json({
+        status,
+        message: statusMSG,
+        responseCode,
+    });
+};

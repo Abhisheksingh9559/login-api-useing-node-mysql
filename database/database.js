@@ -11,7 +11,6 @@ const pool = createPool({
 exports.sqlFunction = async (query) => {
     return new Promise((resolve, reject) => {
         pool.query(query, (err, result) => {
-            console.log(result, '----------');
             if (err) {
                 console.error('Error:', err);
                 reject(err);

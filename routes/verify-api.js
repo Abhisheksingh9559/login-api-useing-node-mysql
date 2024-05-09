@@ -6,9 +6,8 @@ const { userLoginApi, userVerifyApi, userPasswordRestApi } = require('../service
 const { apiAuthenticated, apiStatusCode } = require('../utils/comman');
 
 verifyApiRouter.post(API_URLS.USER_LOGIN, 
-  // apiAuthenticated(),
   async (req, res) => { 
-   (await userLoginApi(req.body, res), res);
+    apiStatusCode(await userLoginApi(req.body, res), res);
 });
 
 verifyApiRouter.get(API_URLS.USER_VERIFY, 

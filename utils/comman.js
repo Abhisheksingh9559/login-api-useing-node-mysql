@@ -58,8 +58,11 @@ exports.apiAuthenticated = () => async (req, res, next) => {
 
 exports.apiStatusCode = async ({ status, message, responseCode }, res) => {
     let statusCode = 200;
-    let statusMSG = 'Success';
-
+    let statusMSG = '';
+    if (status === RESPONSE_STATUS.SUCCESS) {
+        statusCode = 200,
+        statusMSG = message;
+    }
     if (status === RESPONSE_STATUS.FAIL) {
         statusCode = 400;
         statusMSG = message;

@@ -5,6 +5,7 @@ const MESSAGES = {
       INVALID_TOKEN: 'Invalid token',
       PROCEED: 'Proceed!',
       LOGIN_SUCCESSFUL : 'Login successful',
+      PASSWORD_UPDATED : 'Password updated successful',
       INVALID_PARAMETERS: 'You passed invalid parameter. please check and try again!',
       SUCCESS: 'success',
       INVALID_PASSWORD: 'Invalid Password',
